@@ -12,8 +12,8 @@ export default class LevelBar extends React.Component {
 		let style = this.props.style;
 		
 		return (
-						<View style={this.state.style.levelbar_outer}>
-							<View style={this.state.style.levelbar_inner}>
+						<View style={style.levelbar_outer}>
+							<View style={style.levelbar_inner}>
 							</View>
 						</View>
 					);

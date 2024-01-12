@@ -54,11 +54,11 @@ export default class Game extends React.Component {
 	endgame(){this.state.game = 0;}
 	
 		render(){
-		if(this.state.style == 0){
+		if(this.state.style == null){
 				return (
 								<View style={defaultstyle.game}>
 									<ScoreCard tries={this.state.tries} score={this.state.score} style={defaultstyle} />
-									<GameMatrix matrix= {this.state.matrix} swap={(a,b) => this.swap(a,b)} style={defaultstyle} />
+									<GameGrid matrix= {this.state.matrix} swap={(a,b) => this.swap(a,b)} style={defaultstyle} />
 									<LevelBar score={this.state.score} level={this.state.level} style={defaultstyle} />
 								</View>
 							);
@@ -75,3 +75,72 @@ export default class Game extends React.Component {
 			}		
 		}
 
+const defaultstyle = {
+	
+	game:{
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'column',
+		width:'100%' ,
+		height:'100%'
+		}
+	,
+	
+	button_back:{
+		justifyContent: 'center'
+		}
+	,
+	button_text:{
+		justifyContent: 'center'
+		}
+	,
+	
+	display_back:{
+		justifyContent: 'center'
+		}
+	,
+	display_front:{
+		justifyContent: 'center'
+		}
+	,
+	display_innertext:{
+		justifyContent: 'center'
+		}
+	,
+	display_outertext:{
+		justifyContent: 'center'
+		}
+	,	
+	
+	levelbar_outer:{
+		justifyContent: 'center'
+		}
+	,	
+	levelbar_inner:{
+		justifyContent: 'center'
+		}
+	,
+	
+	gameitem:{
+		justifyContent: 'center'
+		}
+	,	
+	gameitem_background:{
+		justifyContent: 'center'
+		}
+	,
+	
+	grid:{
+		justifyContent: 'center'
+		}
+	,	
+	gridrow:{
+		justifyContent: 'center'
+		}
+	,
+	
+	scorecard:{
+		justifyContent: 'center'
+		}
+	
+	}

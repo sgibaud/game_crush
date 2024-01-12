@@ -3,9 +3,12 @@ import {StyleSheet, Text, View, TouchableOpacity, TextInput} from "react-native"
 
 import GameItem from './GameItem.js';
 
-export default class GameMatrix extends React.Component {
+export default class GameGrid extends React.Component {
 
 	render(){
+		
+		matrix = this.props.matrix;
+		style = this.props.style;
 		
 		var matrixdisplay = null;
 		var matrixrowdisplay = null;
@@ -14,12 +17,12 @@ export default class GameMatrix extends React.Component {
 			for(let j = 0 ; j < matrix[i].length ; j++){
 				matrixrowdisplay += <GameItem image={'"assets/img/'+row[j]+'.png"'}  pressed={this.props.swap(row[j])} style={this.props.style}/>;
 				}
-			matrixdisplay += <View style={this.state.style.matrixrow}> {matrixrowdisplay} </View>;
+			matrixdisplay += <View style={style.gridrow}> {matrixrowdisplay} </View>;
 			matrixrowdisplay = null;
 			}
 		
 		return (
-						<View style={this.state.style.matrix}>
+						<View style={style.grid}>
 							{matrixdisplay}
 						</View>
 					);

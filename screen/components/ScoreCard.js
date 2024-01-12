@@ -12,9 +12,9 @@ export default class ScoreCard extends React.Component {
 		let style = this.props.style;
 		
 		return (
-						<View style={this.state.style.scorecard}>
-							<BasicDisplay innertext={score}  outertext={Score} style={style}/>
-							<BasicDisplay innertext={tries}  outertext={Essai} style={style}/>
+						<View style={style.scorecard}>
+							<BasicDisplay innertext={score}  outertext="Score" style={style}/>
+							<BasicDisplay innertext={tries}  outertext="Essai" style={style}/>
 						</View>
 					);
 			}		
