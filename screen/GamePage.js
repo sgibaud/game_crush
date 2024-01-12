@@ -87,60 +87,60 @@ const defaultstyle = {
 	,
 	
 	button_back:{
-		justifyContent: 'center'
+		backgroundColor: '#000000'
 		}
 	,
 	button_text:{
-		justifyContent: 'center'
+		color: '#000000'
 		}
 	,
 	
 	display_back:{
-		justifyContent: 'center'
+		backgroundColor: '#000000'
 		}
 	,
 	display_front:{
-		justifyContent: 'center'
+		backgroundColor: '#0000FF'
 		}
 	,
 	display_innertext:{
-		justifyContent: 'center'
+		color: '#00FFFF'
 		}
 	,
 	display_outertext:{
-		justifyContent: 'center'
+		color: '#00FF00'
 		}
 	,	
 	
 	levelbar_outer:{
-		justifyContent: 'center'
+		backgroundColor: '#000000'
 		}
 	,	
 	levelbar_inner:{
-		justifyContent: 'center'
+		backgroundColor: '#0FFFF0'
 		}
 	,
 	
 	gameitem:{
-		justifyContent: 'center'
+		backgroundColor: '#000000'
 		}
 	,	
 	gameitem_background:{
-		justifyContent: 'center'
+		backgroundColor: '#00FF00'
 		}
 	,
 	
 	grid:{
-		justifyContent: 'center'
+		backgroundColor: '#0000FF'
 		}
 	,	
 	gridrow:{
-		justifyContent: 'center'
+		backgroundColor: '#FF0000'
 		}
 	,
 	
 	scorecard:{
-		justifyContent: 'center'
+		backgroundColor: '#FFFF00'
 		}
 	
 	}
