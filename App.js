@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import GamePage from './screen/GamePage.js';
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Everything starts here!</Text>
-      <StatusBar style="auto" />
+    <View>
+		<GamePage/>
     </View>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import {StyleSheet, Text, View, TouchableOpacity, TextInput} from "react-native";
-import {styles} from './Style.js';
+
+
 
 export default class BasicButton extends React.Component{
 	
@@ -8,13 +9,14 @@ export default class BasicButton extends React.Component{
 		
 		let buttontext = this.props.text;
 		let pressed = this.props.pressed;
+		let style = this.props.style;
 		
 		return(
-				<TouchableOpacity style={styles.button1back} onPress={pressed}>
-					<Text style={styles.button1}>{buttontext}</Text>
+				<TouchableOpacity style={style.button_back} onPress={pressed}>
+					<Text style={style.button_text}>{buttontext}</Text>
 				</TouchableOpacity>
 			)
 		}
 	}
 
- // <BasicButton text={buttontext} pressed={onpressaction}/>
+ // <BasicButton text={buttontext} pressed={onpressaction} style={style}/>
