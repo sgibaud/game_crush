@@ -4,11 +4,11 @@ import { Text, View, ImageBackground } from "react-native";
 // CSS
 import { styles } from "../../css/style";
 
-export default class BasicDisplay extends React.Component {
+export default class BasicDisplay2 extends React.Component {
 
 	render() {
 
-		const iconScore = require("../../assets/icon/2x/zoneYellowxhdpi.webp");
+		const iconScore = require("../../assets/icon/2x/zonePurplexhdpi.webp");
 
 		let innertext = this.props.innertext;
 		let outertext = this.props.outertext;
@@ -16,13 +16,8 @@ export default class BasicDisplay extends React.Component {
 
 		return (
 			<View style={styles.globalHeader}>
-				<ImageBackground source={iconScore} style={styles.iconScore}>
+				<ImageBackground source={iconScore} style={styles.iconScore2}>
 					<Text style={styles.display_outertext}>{outertext}</Text>
-					<View>
-						<View>
-							<Text style={styles.display_innertext}>{innertext}</Text>
-						</View>
-					</View>
 				</ImageBackground>
 			</View>
 		)
