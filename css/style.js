@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+	flex: {
+		flex: 1
+	},
 	container: {
 		alignItems: 'center',
 		justifyContent: 'center'
@@ -21,7 +24,7 @@ export const styles = StyleSheet.create({
 	iconScore: {
 		alignItems: "center",
 		justifyContent: 'center',
-		margin:20,
+		margin: 20,
 		padding: 4,
 		width: 90,
 		height: 90
@@ -29,7 +32,7 @@ export const styles = StyleSheet.create({
 	iconScore2: {
 		alignItems: "center",
 		justifyContent: 'center',
-		margin:20,
+		margin: 20,
 		padding: 4,
 		width: 50,
 		height: 50
@@ -45,10 +48,36 @@ export const styles = StyleSheet.create({
 		width: "100%",
 	},
 	game: {
-		alignItems: 'center',
-		justifyContent: 'center',
 		width: '100%',
 		height: '100%'
+	},
+	gridBox: {
+		width: '12%',
+		height: '12%',
+		backgroundColor: 'rgba(0 0 0 / 0.10)',
+		borderRadius: 8,
+		margin: 0.75
+	},
+	gridBoxB: {
+		backgroundColor: 'rgba(0 0 0 / 0.15)',
+	},
+	box: {
+		bottom: 100,
+		height: 400,
+		margin: 15,
+		padding: 1,
+		backgroundColor: 'rgba(255 255 255 / 0.15)',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+		alignContent: 'center',
+		borderRadius: 8,
+		borderColor: 'rgb(242 25 5)',
+		borderWidth: 2,
+		// shadowColor: 'rgb(0 0 0)',
+		// shadowOffset: {width: 5, height: 6},
+		// shadowOpacity: 0.5,
+		// shadowRadius: 3
 	},
 	button_back: {
 		backgroundColor: '#000000'

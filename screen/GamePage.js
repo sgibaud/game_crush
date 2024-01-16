@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImageBackground } from "react-native";
 
+// COMPONENTS
 import LevelBar from './components/LevelBar.js';
 import BasicButton from './components/BasicButton.js';
 import ScoreCard from './components/ScoreCard.js';
 import GameGrid from './components/GameGrid.js';
+import Box from "./components/box.js";
 
 // CSS
 import { styles } from '../css/style.js';
@@ -59,11 +61,14 @@ export default class Game extends React.Component {
 
 		if (this.state.style == null) {
 			return (
-				<View style={styles.container}>
+				<View style={styles.game}>
 					<ImageBackground source={image} style={styles.ImageBackground}>
-						<ScoreCard tries={this.state.tries} score={this.state.score} style={styles} />
-						<GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} />
-						<LevelBar score={this.state.score} level={this.state.level} style={styles} />
+						<View style={styles.flex}>
+							<ScoreCard tries={this.state.tries} score={this.state.score} style={styles} />
+							<GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} />
+							<LevelBar score={this.state.score} level={this.state.level} style={styles} />
+						</View>		
+							<Box />
 					</ImageBackground>
 				</View>
 			);
@@ -74,6 +79,7 @@ export default class Game extends React.Component {
 					<ScoreCard tries={this.state.tries} score={this.state.score} style={this.state.style} />
 					<GameMatrix matrix={this.state.matrix} swap={() => this.swap()} style={this.state.style} />
 					<LevelBar score={this.state.score} level={this.state.level} style={this.state.style} />
+					<Box />
 				</View>
 			);
 		}

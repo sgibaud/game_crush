@@ -16,8 +16,7 @@ export default class ScoreCard extends React.Component {
 		let style = this.props.style;
 
 		return (
-			<View>
-
+			<View style={styles.flex}>
 				<View style={styles.triesScore2}>
 					<BasicDisplay2 outertext='HELP' style={style} />
 					<BasicDisplay2 outertext='PAUSE' style={style} />

@@ -19,9 +19,7 @@ export default class BasicDisplay extends React.Component {
 				<ImageBackground source={iconScore} style={styles.iconScore}>
 					<Text style={styles.display_outertext}>{outertext}</Text>
 					<View>
-						<View>
-							<Text style={styles.display_innertext}>{innertext}</Text>
-						</View>
+						<Text style={styles.display_innertext}>{innertext}</Text>
 					</View>
 				</ImageBackground>
 			</View>
