@@ -15,7 +15,7 @@ export default class GameGrid extends React.Component {
 
 		for (let i = 0; i < matrix.length; i++) {
 			for (let j = 0; j < matrix[i].length; j++) {
-				matrixrowdisplay += <GameItem image={'"assets/img/' + row[j] + '.png"'} pressed={this.props.swap(row[j])} style={this.props.style} />;
+				matrixrowdisplay += <GameItem image={'"assets/img/' + row[j] + '.webp"'} pressed={this.props.swap(row[j])} style={this.props.style} />;
 			}
 			matrixdisplay += <View style={style.gridrow}> {matrixrowdisplay} </View>;
 			matrixrowdisplay = null;

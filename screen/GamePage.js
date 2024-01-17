@@ -67,8 +67,8 @@ export default class Game extends React.Component {
 							<ScoreCard tries={this.state.tries} score={this.state.score} style={styles} />
 							<GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} />
 							<LevelBar score={this.state.score} level={this.state.level} style={styles} />
-						</View>		
-							<Box />
+						</View>
+						<Box />
 					</ImageBackground>
 				</View>
 			);
@@ -77,9 +77,11 @@ export default class Game extends React.Component {
 			return (
 				<View style={styles.game}>
 					<ScoreCard tries={this.state.tries} score={this.state.score} style={this.state.style} />
-					<GameMatrix matrix={this.state.matrix} swap={() => this.swap()} style={this.state.style} />
 					<LevelBar score={this.state.score} level={this.state.level} style={this.state.style} />
-					<Box />
+					<View>
+						<GameGrid matrix={this.state.matrix} swap={() => this.swap()} style={this.state.style} />
+						<Box />
+					</View>
 				</View>
 			);
 		}
