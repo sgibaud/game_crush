@@ -11,19 +11,20 @@ export default class ScoreCard extends React.Component {
 
 	render() {
 
-		let score = this.props.score;
-		let tries = this.props.tries;
-		let style = this.props.style;
+		const iconPause = require("../../assets/icon/2x/zonePurplePausexhdpi.webp");
+		const iconHelp = require("../../assets/icon/2x/zonePurpleHelpxhdpi.webp");
+
+		let {score, tries, style} = this.props;
 
 		return (
 			<View style={styles.flex}>
 				<View style={styles.triesScore2}>
-					<BasicDisplay2 outertext='HELP' style={style} />
-					<BasicDisplay2 outertext='PAUSE' style={style} />
+					<BasicDisplay2 iconBlue={iconHelp} style={style} />
+					<BasicDisplay2 iconBlue={iconPause} style={style} />
 				</View>
 				<View style={styles.triesScore}>
-					<BasicDisplay innertext={tries} outertext="Essai" style={style} />
-					<BasicDisplay innertext={score} outertext="Score" style={style} />
+					<BasicDisplay innertext={tries} outertext="ESSAI" style={style} />
+					<BasicDisplay innertext={score} outertext="SCORE" style={style} />
 				</View>
 			</View>
 		);

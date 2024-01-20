@@ -10,16 +10,14 @@ export default class BasicDisplay extends React.Component {
 
 		const iconScore = require("../../assets/icon/2x/zoneYellowxhdpi.webp");
 
-		let innertext = this.props.innertext;
-		let outertext = this.props.outertext;
-		let style = this.props.style;
+		let {innertext, outertext, style} = this.props;
 
 		return (
 			<View style={styles.globalHeader}>
 				<ImageBackground source={iconScore} style={styles.iconScore}>
-					<Text style={styles.display_outertext}>{outertext}</Text>
-					<View>
-						<Text style={styles.display_innertext}>{innertext}</Text>
+					<View style={styles.blockYellow}>
+						<Text style={styles.display_outertext}>{outertext}</Text>
+						<Text style={styles.fontBold}>{innertext}</Text>
 					</View>
 				</ImageBackground>
 			</View>
@@ -27,4 +25,4 @@ export default class BasicDisplay extends React.Component {
 	}
 }
 
-// <BasicDisplay innertext={text}  outertext={text} style={style}/>
+// <BasicDisplay innertext={text}  outertext={text} style={style}/>	

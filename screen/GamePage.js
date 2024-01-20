@@ -18,8 +18,8 @@ export default class Game extends React.Component {
 		this.state = {
 			game: 0,
 			score: 0,
+			tries: 5,
 			time: 0,
-			tries: 0,
 			matrix: [],
 			level: 0,
 			style: null
@@ -62,28 +62,30 @@ export default class Game extends React.Component {
 		if (this.state.style == null) {
 			return (
 				<View style={styles.game}>
-					<ImageBackground source={image} style={styles.ImageBackground}>
-						<View style={styles.flex}>
-							<ScoreCard tries={this.state.tries} score={this.state.score} style={styles} />
-							<GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} />
-							<LevelBar score={this.state.score} level={this.state.level} style={styles} />
-						</View>
-						<Box />
+					<ImageBackground source={image} style={styles.ImageBackground}>	
+							<View style={styles.flex}>
+								<ScoreCard tries={this.state.tries} score={this.state.score} style={styles} />
+								<LevelBar score={this.state.score} level={this.state.level} style={styles} />
+							</View>
+							<View style={styles.flex_2}>
+								{/* <GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} /> */}
+								<Box />
+							</View>
 					</ImageBackground>
 				</View>
 			);
 		}
-		else {
-			return (
-				<View style={styles.game}>
-					<ScoreCard tries={this.state.tries} score={this.state.score} style={this.state.style} />
-					<LevelBar score={this.state.score} level={this.state.level} style={this.state.style} />
-					<View>
-						<GameGrid matrix={this.state.matrix} swap={() => this.swap()} style={this.state.style} />
-						<Box />
-					</View>
-				</View>
-			);
-		}
+		// else {
+		// 	return (
+		// 		<View style={styles.game}>
+		// 			<ScoreCard tries={this.state.tries} score={this.state.score} style={this.state.style} />
+		// 			<GameGrid matrix={this.state.matrix} swap={() => this.swap()} style={this.state.style} />
+		// 			<LevelBar score={this.state.score} level={this.state.level} style={this.state.style} />
+		// 			<View>
+		// 				<Box />
+		// 			</View>
+		// 		</View>
+		// 	);
+		// }
 	}
 }

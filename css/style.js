@@ -1,12 +1,78 @@
 import { StyleSheet } from "react-native";
 
+const TekoBold = '../assets/fonts/Teko-Bold.ttf';
+
 export const styles = StyleSheet.create({
+	// font
+	fontBold: {
+		// fontFamily: TekoBold,
+		fontWeight: '900',
+		fontSize: 50,
+		color: '#6805F2',
+		margin: 0,
+		padding: 0,
+		bottom: 10,
+		textShadowColor: 'rgb(0 0 0)',
+		textShadowOffset: { width: 0, height: 0 },
+		textShadowRadius: 4
+	},
+	fontGamer: {
+		// fontFamily: TekoBold,
+		fontWeight: '400',
+		fontSize: 20,
+		color: 'rgb(255 255 255)',
+		marginBottom: 6
+	},
+	fontTable: {
+		// fontFamily: TekoBold,
+		fontWeight: '700',
+		fontSize: 20,
+		color: 'rgb(255 255 255)',
+		marginBottom: 6
+	},
+	fontModal: {
+		// fontFamily: TekoBold,
+		fontWeight: '900',
+		fontSize: 30,
+		color: 'rgb(255 255 255)',
+		marginBottom: 6
+	},
+	// Global
 	flex: {
 		flex: 1
+	},
+	flex_2: {
+		flex: 2
 	},
 	container: {
 		alignItems: 'center',
 		justifyContent: 'center'
+	},
+	directionRow: {
+		flexDirection: 'row'
+	},
+	backgroundxModal: {
+		flex: 1,
+		backgroundColor: '#6805F2',
+		opacity: 8
+	},
+	boxModal: {
+		width: 250,
+		height: 450,
+		backgroundColor: '#05DBF2',
+		borderRadius: 8,
+		padding: 20
+	},
+	shadowProp: {
+		shadowColor: 'rgb(60 60 60)',
+		elevation: 20
+	},
+	space: {
+		justifyContent: 'space-between',
+		paddingRight: 23
+	},
+	margin: {
+		marginBottom: 30
 	},
 	ImageBackground: {
 		width: "100%",
@@ -17,9 +83,30 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'red',
 	},
 	globalHeader: {
-		top: 50,
+		top: '15%',
 		paddingLeft: 10,
 		paddingRight: 10
+	},
+	// Box Icon
+	blockYellow: {
+		paddingTop: 20,
+		paddingBottom: 20,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	newGame: {
+		alignItems: "center",
+		justifyContent: 'center',
+		margin: 20,
+		marginTop: 40,
+		width: "auto",
+		height: 49
+	},
+	player: {
+		alignItems: "center",
+		justifyContent: 'center',
+		width: 90,
+		height: 90
 	},
 	iconScore: {
 		alignItems: "center",
@@ -32,10 +119,9 @@ export const styles = StyleSheet.create({
 	iconScore2: {
 		alignItems: "center",
 		justifyContent: 'center',
-		margin: 20,
-		padding: 4,
-		width: 50,
-		height: 50
+		marginRight: 20,
+		width: 35,
+		height: 35
 	},
 	triesScore: {
 		flexDirection: 'row',
@@ -47,6 +133,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 		width: "100%",
 	},
+	// Grid
 	game: {
 		width: '100%',
 		height: '100%'
@@ -62,7 +149,6 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'rgba(0 0 0 / 0.15)',
 	},
 	box: {
-		bottom: 100,
 		height: 400,
 		margin: 15,
 		padding: 1,
@@ -74,18 +160,19 @@ export const styles = StyleSheet.create({
 		borderRadius: 8,
 		borderColor: 'rgb(242 25 5)',
 		borderWidth: 2,
-		// shadowColor: 'rgb(0 0 0)',
-		// shadowOffset: {width: 5, height: 6},
-		// shadowOpacity: 0.5,
-		// shadowRadius: 3
+		shadowColor: 'rgb(125 125 125)',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0.85,
+		shadowRadius: 2
 	},
+	// Divers
 	button_back: {
 		backgroundColor: '#000000'
 	},
 	button_text: {
 		color: '#000000'
 	},
-
+	// CSS Robin
 	display_back: {
 		backgroundColor: '#000000'
 	},
@@ -96,13 +183,30 @@ export const styles = StyleSheet.create({
 		color: '#FFFFFF'
 	},
 	display_outertext: {
-		color: '#FFFFFF'
+		// fontFamily: 'TekoBold',
+		fontWeight: '800',
+		fontSize: 20,
+		color: 'rgb(255 255 255)',
+		margin: 0
 	},
 	levelbar_outer: {
-		backgroundColor: '#FFEEEE'
+		width: 'auto',
+		marginRight: 15,
+		marginLeft: 15,
+		height: '10%',
+		padding: 2,
+		// backgroundColor: '#FFEEEE',
+		borderColor: '#0137BB',
+		borderRadius: 8,
+		borderWidth: 2
 	},
 	levelbar_inner: {
-		backgroundColor: '#0FFFF0'
+		width: '50%',
+		height: '100%',
+		borderRadius: 4,
+		backgroundColor: '#37E2F5',
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	gameitem: {
 		backgroundColor: '#000000'

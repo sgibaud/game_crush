@@ -6,6 +6,20 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    // "plugins": [
+    //   [
+    //     "expo-font",
+    //     {
+    //       "fonts": [
+    //         "./assets/fonts/Teko-Bold.ttf",
+    //         "./assets/fonts/Teko-light.ttf",
+    //         "./assets/fonts/Teko-Medium.ttf",
+    //         "./assets/fonts/Teko-regular.ttf",
+    //         "./assets/fonts/Teko-Semi-Bold.ttf"
+    //       ]
+    //     }
+    //   ]
+    // ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

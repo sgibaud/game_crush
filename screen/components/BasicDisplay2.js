@@ -8,17 +8,11 @@ export default class BasicDisplay2 extends React.Component {
 
 	render() {
 
-		const iconScore = require("../../assets/icon/2x/zonePurplexhdpi.webp");
-
-		let innertext = this.props.innertext;
-		let outertext = this.props.outertext;
-		let style = this.props.style;
+		let {iconBlue, innertext, outertext, style} = this.props;
 
 		return (
 			<View style={styles.globalHeader}>
-				<ImageBackground source={iconScore} style={styles.iconScore2}>
-					<Text style={styles.display_outertext}>{outertext}</Text>
-				</ImageBackground>
+				<ImageBackground source={iconBlue} style={styles.iconScore2} />
 			</View>
 		)
 	}
