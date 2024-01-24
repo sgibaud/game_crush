@@ -2,7 +2,6 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
 
-
 export default class BasicButton extends React.Component {
 
 	render() {

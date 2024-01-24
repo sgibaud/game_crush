@@ -6,7 +6,7 @@ import LevelBar from './components/LevelBar.js';
 import BasicButton from './components/BasicButton.js';
 import ScoreCard from './components/ScoreCard.js';
 import GameGrid from './components/GameGrid.js';
-import Box from "./components/box.js";
+import Box from "./components/gridAndJewel/box.js";
 
 // CSS
 import { styles } from '../css/style.js';

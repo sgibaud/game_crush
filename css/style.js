@@ -1,11 +1,17 @@
 import { StyleSheet } from "react-native";
+import {
+	Teko_300Light,
+	Teko_400Regular,
+	Teko_500Medium,
+	Teko_600SemiBold,
+	Teko_700Bold,
+} from '@expo-google-fonts/teko';
 
-const TekoBold = '../assets/fonts/Teko-Bold.ttf';
 
 export const styles = StyleSheet.create({
 	// font
 	fontBold: {
-		// fontFamily: TekoBold,
+		// fontFamily: 'Teko_700Bold',
 		fontWeight: '900',
 		fontSize: 50,
 		color: '#6805F2',
@@ -17,7 +23,7 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 4
 	},
 	fontGamer: {
-		// fontFamily: TekoBold,
+		fontFamily: 'Teko Bold',
 		fontWeight: '400',
 		fontSize: 20,
 		color: 'rgb(255 255 255)',
@@ -141,17 +147,18 @@ export const styles = StyleSheet.create({
 	gridBox: {
 		width: '12%',
 		height: '12%',
-		backgroundColor: 'rgba(0 0 0 / 0.10)',
+		backgroundColor: 'rgba(150 50 50 / 0.10)',
 		borderRadius: 8,
 		margin: 0.75
 	},
 	gridBoxB: {
-		backgroundColor: 'rgba(0 0 0 / 0.15)',
+		backgroundColor: 'rgba(50 50 150 / 0.25)',
 	},
 	box: {
 		height: 400,
 		margin: 15,
 		padding: 1,
+		marginTop:40,
 		backgroundColor: 'rgba(255 255 255 / 0.15)',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
@@ -164,6 +171,23 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 0 },
 		shadowOpacity: 0.85,
 		shadowRadius: 2
+	},
+	// Construction Jewel
+	boxJewel: {
+		height: 400,
+		marginTop: 40,
+		margin: 15,
+		padding: 5,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+		alignContent: 'space-around',
+		position: 'absolute'
+	},
+	jewel: {
+		width: 39,
+		height:39,
+		margin: 1.5
 	},
 	// Divers
 	button_back: {

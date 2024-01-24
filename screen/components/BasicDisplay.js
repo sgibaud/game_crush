@@ -1,20 +1,28 @@
 import React from "react";
 import { Text, View, ImageBackground } from "react-native";
 
+// import constants
+import { images } from '../../constants'
+
 // CSS
 import { styles } from "../../css/style";
 
 export default class BasicDisplay extends React.Component {
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		images: ''
+	// 	}
+
+	// }
 
 	render() {
-
-		const iconScore = require("../../assets/icon/2x/zoneYellowxhdpi.webp");
 
 		let {innertext, outertext, style} = this.props;
 
 		return (
 			<View style={styles.globalHeader}>
-				<ImageBackground source={iconScore} style={styles.iconScore}>
+				<ImageBackground source={images.iconScore} style={styles.iconScore}>
 					<View style={styles.blockYellow}>
 						<Text style={styles.display_outertext}>{outertext}</Text>
 						<Text style={styles.fontBold}>{innertext}</Text>

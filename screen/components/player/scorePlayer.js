@@ -4,6 +4,9 @@ import { ImageBackground, Text, View } from "react-native";
 // Components
 import Player from './player.js';
 
+// import constants
+import { images } from '../../../constants'
+
 // CSS
 import { styles } from '../../../css/style';
 
@@ -16,7 +19,6 @@ export default class ScorePlayer extends React.Component {
 	}
 
 	render() {
-		const newGame = require("../../../assets/icon/2x/newgamexhdpi.webp");
 		for (let i = 0; i < 6; i++) {
 			this.state.player.push(
 				<View style={[styles.directionRow, styles.space]}>
@@ -37,7 +39,7 @@ export default class ScorePlayer extends React.Component {
 						<Text style={styles.fontTable}>LEVEL</Text>
 					</View>
 					{this.state.player}
-					<ImageBackground source={newGame} style={styles.newGame}></ImageBackground>
+					<ImageBackground source={images.newGame} style={styles.newGame}></ImageBackground>
 				</View>
 			</View>
 		);
