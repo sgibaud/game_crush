@@ -74,7 +74,7 @@ export default class Box extends React.Component {
         // console.log(this.state.jewelRandom[i]);
         return this.state.jewelRandom[i];
     }; 
-
+    
     buildJewel = () => {
         for (let i = 0; i < this.state.gridWidth; i++) {
             for (let j = 0; j < this.state.gridHeight; j++) {
