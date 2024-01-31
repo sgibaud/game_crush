@@ -1,17 +1,8 @@
 import { StyleSheet } from "react-native";
-import {
-	Teko_300Light,
-	Teko_400Regular,
-	Teko_500Medium,
-	Teko_600SemiBold,
-	Teko_700Bold,
-} from '@expo-google-fonts/teko';
-
 
 export const styles = StyleSheet.create({
 	// font
 	fontBold: {
-		// fontFamily: 'Teko_700Bold',
 		fontWeight: '900',
 		fontSize: 50,
 		color: '#6805F2',
@@ -23,21 +14,18 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 4
 	},
 	fontGamer: {
-		fontFamily: 'Teko Bold',
 		fontWeight: '400',
 		fontSize: 20,
 		color: 'rgb(255 255 255)',
 		marginBottom: 6
 	},
 	fontTable: {
-		// fontFamily: TekoBold,
 		fontWeight: '700',
 		fontSize: 20,
 		color: 'rgb(255 255 255)',
 		marginBottom: 6
 	},
 	fontModal: {
-		// fontFamily: TekoBold,
 		fontWeight: '900',
 		fontSize: 30,
 		color: 'rgb(255 255 255)',
@@ -57,10 +45,10 @@ export const styles = StyleSheet.create({
 	directionRow: {
 		flexDirection: 'row'
 	},
-	backgroundxModal: {
+	backgroundModal: {
 		flex: 1,
-		backgroundColor: '#6805F2',
-		opacity: 8
+		backgroundColor: 'rgba(104 1 242 / 0.8)',
+		opacity: 4,
 	},
 	boxModal: {
 		width: 250,
@@ -109,10 +97,8 @@ export const styles = StyleSheet.create({
 		height: 49
 	},
 	player: {
-		alignItems: "center",
-		justifyContent: 'center',
-		width: 90,
-		height: 90
+		width: 120,
+		height: 120,
 	},
 	iconScore: {
 		alignItems: "center",
@@ -138,6 +124,7 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'flex-end',
 		width: "100%",
+		marginTop:40
 	},
 	// Grid
 	game: {
@@ -184,6 +171,10 @@ export const styles = StyleSheet.create({
 		alignContent: 'space-around',
 		position: 'absolute'
 	},
+	// boxjewelHidden: {
+	// 	display:'none',
+	// 	backfaceVisibility
+	// },
 	jewel: {
 		width: 39,
 		height:39,
@@ -207,7 +198,6 @@ export const styles = StyleSheet.create({
 		color: '#FFFFFF'
 	},
 	display_outertext: {
-		// fontFamily: 'TekoBold',
 		fontWeight: '800',
 		fontSize: 20,
 		color: 'rgb(255 255 255)',
@@ -219,7 +209,6 @@ export const styles = StyleSheet.create({
 		marginLeft: 15,
 		height: '10%',
 		padding: 2,
-		// backgroundColor: '#FFEEEE',
 		borderColor: '#0137BB',
 		borderRadius: 8,
 		borderWidth: 2

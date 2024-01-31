@@ -1,14 +1,17 @@
 import React from "react";
-import { Text, View, ImageBackground } from "react-native";
+import { View, ImageBackground } from "react-native";
 
 // CSS
 import { styles } from "../../css/style";
 
 export default class BasicDisplay2 extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
 	render() {
 
-		let {iconBlue, innertext, outertext, style} = this.props;
+		let { iconBlue } = this.props;
 
 		return (
 			<View style={styles.globalHeader}>
@@ -17,5 +20,3 @@ export default class BasicDisplay2 extends React.Component {
 		)
 	}
 }
-
-// <BasicDisplay innertext={text}  outertext={text} style={style}/>

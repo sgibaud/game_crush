@@ -1,6 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 // import AppLoading from 'expo-app-loading';
+// import Constants from 'expo-constants';
+// console.log(Constants.systemFonts);
+
 
 
 import GamePage from './screen/GamePage.js';

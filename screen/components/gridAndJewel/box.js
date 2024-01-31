@@ -14,6 +14,7 @@ export default class Box extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            status: true,
             grid: null,
             gridHeight: 8,
             gridWidth: 8,
@@ -86,6 +87,7 @@ export default class Box extends React.Component {
     }
 
     render() {
+        
         return (
             <View>
                 <View style={styles.box}>
@@ -94,6 +96,7 @@ export default class Box extends React.Component {
                 <View style={styles.boxJewel}>
                     {this.state.jewel}
                 </View>
+
             </View>
         )
     }

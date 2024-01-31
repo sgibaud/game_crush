@@ -27,7 +27,14 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Teko Bold.ttf"
+          ]
+        }
+      ]
     ],
     "sdkVersion": "50.0.0"
   },
