@@ -29,7 +29,7 @@ export default class ScorePlayer extends React.Component {
 		}
 
 		return (
-			<View style={[styles.container, styles.backgroundxModal]}>
+			<View style={[styles.container, styles.backgroundModal]}>
 				<View style={[styles.boxModal, styles.shadowProp]}>
 					<View style={[styles.container, styles.margin]}>
 						<Text style={styles.fontModal}>HIGHSCORE</Text>

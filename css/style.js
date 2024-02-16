@@ -126,6 +126,30 @@ export const styles = StyleSheet.create({
 		width: "100%",
 		marginTop:40
 	},
+	// ProgressBar
+	levelbar_inner: {
+		// width: '35%',
+		height: '100%',
+		borderRadius: 4,
+		backgroundColor: '#37E2F5',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	progress:{
+		width: "auto",
+		borderColor: 0,
+		color: 'none'
+	},
+	levelbar_outer: {
+		width: 'auto',
+		marginRight: 15,
+		marginLeft: 15,
+		height: '10%',
+		padding: 2,
+		borderColor: '#0137BB',
+		borderRadius: 8,
+		borderWidth: 2
+	},
 	// Grid
 	game: {
 		width: '100%',
@@ -159,7 +183,7 @@ export const styles = StyleSheet.create({
 		shadowOpacity: 0.85,
 		shadowRadius: 2
 	},
-	// Construction Jewel
+	// Construction Jewel par dessus la map
 	boxJewel: {
 		height: 400,
 		marginTop: 40,
@@ -202,24 +226,6 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		color: 'rgb(255 255 255)',
 		margin: 0
-	},
-	levelbar_outer: {
-		width: 'auto',
-		marginRight: 15,
-		marginLeft: 15,
-		height: '10%',
-		padding: 2,
-		borderColor: '#0137BB',
-		borderRadius: 8,
-		borderWidth: 2
-	},
-	levelbar_inner: {
-		width: '50%',
-		height: '100%',
-		borderRadius: 4,
-		backgroundColor: '#37E2F5',
-		alignItems: 'center',
-		justifyContent: 'center'
 	},
 	gameitem: {
 		backgroundColor: '#000000'

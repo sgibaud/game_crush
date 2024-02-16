@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Pressable, ImageBackground, Modal } from "react-native";
+import { View, ImageBackground, Modal, TouchableOpacity } from "react-native";
 
 // COMPONENTS
 import BasicButton from './components/BasicButton.js';
@@ -15,6 +15,8 @@ import { images } from '../constants'
 
 // CSS
 import { styles } from '../css/style.js';
+import ScorePlayer from "./components/player/scorePlayer.js";
+import ModalPause from "./components/pause.js";
 
 export default class Game extends React.Component {
 
@@ -22,7 +24,8 @@ export default class Game extends React.Component {
 		super(props);
 		this.state = {
 			game: 0,
-			score: 0,
+			score: 80,
+			width: '50%',
 			tries: 5,
 			time: 0,
 			matrix: [],
@@ -30,7 +33,35 @@ export default class Game extends React.Component {
 			style: null,
 			status: true,
 			modalVisible: false,
+			modalScore: false,
+			pause: true
 		};
+	}
+
+	// decrementation de la barre de temps
+	componentDidMount() {
+		this.count()
+	}
+
+	count() {
+		let counter = 186;
+		const interval = setInterval(() => {
+			if (!this.state.status) {
+				this.setState({ width: counter })
+			} else {
+				counter = counter - this.state.score;
+				this.setState({
+					width: counter
+				})
+				if (counter <= 0) {
+					this.setState({
+						width: 0
+					})
+					this.setState({ modalScore: true });
+					clearInterval(interval);
+				}
+			}
+		}, 3000);
 	}
 
 	newgame() {
@@ -63,11 +94,13 @@ export default class Game extends React.Component {
 
 	endgame() { this.state.game = 0; }
 
+
+	// function modal
 	showModal = () => {
 		this.setState({ modalVisible: true });
 		this.setState({ status: !this.state.status });
 	}
-	
+
 	hideModal = () => {
 		this.setState({ modalVisible: false });
 		this.setState({ status: !this.state.status });
@@ -84,6 +117,7 @@ export default class Game extends React.Component {
 						<View style={styles.flex}>
 							<View>
 								<View>
+									{/* Modal pour mettre en pause */}
 									<Modal
 										animation="slide"
 										transparent={true}
@@ -91,26 +125,34 @@ export default class Game extends React.Component {
 										hardwareAccelerated={true}
 										statusBarTranslucent={true}
 										onRequestClose={this.hideModal}>
-										<View style={[styles.container, styles.backgroundModal]}>
-											<Pressable
-												onPress={this.hideModal}>
-												<ImageBackground source={images.player} style={styles.player}></ImageBackground>
-											</Pressable>
-										</View>
+										<ModalPause onPress={this.hideModal} />
 									</Modal>
+
+									{/* Modal pour l'affichage des scores finaux */}
+									<Modal
+										visible={this.state.modalScore}
+										animation="slide"
+										transparent={true}
+										statusBarTranslucent={true}
+									>
+										<ScorePlayer />
+									</Modal>
+
 									<View style={styles.triesScore2}>
-										<Pressable onPress={this.showModal}>
+										<TouchableOpacity onPress={this.showModal}>
 											<BasicDisplay2 iconBlue={images.iconPause} />
-										</Pressable>
-										<Pressable>
+										</TouchableOpacity>
+										<TouchableOpacity>
 											<BasicDisplay2 iconBlue={images.iconHelp} />
-										</Pressable>
+										</TouchableOpacity>
 									</View>
 								</View>
 							</View>
+
+							{/* Icone du nombre d'essai et affichage du level */}
 							<View style={styles.triesScore}>
 								<BasicDisplay innertext={this.state.tries} outertext="ESSAI" />
-								<BasicDisplay innertext={this.state.score} outertext="SCORE" />
+								<BasicDisplay innertext={this.state.score} outertext="LEVEL" />
 							</View>
 						</View>
 						{/* <ScoreCard
@@ -120,8 +162,11 @@ export default class Game extends React.Component {
 							// hideModal={this.hideModal}
 							/> */}
 
-						<LevelBar score={this.state.score} level={this.state.level} />
+						{/* Compteur */}
+						<LevelBar score={this.state.width} />
 					</View>
+
+					{/* affichage de la grille et des joyaux */}
 					<View style={styles.flex_2}>
 						{/* <GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} /> */}
 						{this.state.status ? <Box /> : null}

@@ -1,8 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-
-// components
-import JewelPiece from './jewelCollection';
+import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 
 // import constants
 import { images } from "../../../constants";
@@ -15,10 +12,11 @@ export default class Box extends React.Component {
         super(props);
         this.state = {
             status: true,
-            grid: null,
-            gridHeight: 8,
-            gridWidth: 8,
+            grid: [],
+            board: 64,
             line: [],
+            gridWidth: 8,
+            gridHeigth: 8,
             jewel: [],
             jewelRandom: [
                 images.one,
@@ -27,7 +25,7 @@ export default class Box extends React.Component {
                 images.four,
                 images.five,
                 images.six,
-                images.seven,
+                images.seven
             ]
         }
     }
@@ -38,23 +36,17 @@ export default class Box extends React.Component {
     }
 
     initGame = () => {
-        this.setState({ grid: this.buildGrid()});
+        this.setState({ grid: this.buildGrid() });
     }
 
     initJewel = () => {
         this.buildJewel();
     }
 
-    // Jewel
-    // generationJewel = () => {
-    //     let jewel = this.JewelCollection;
-    //     console.log(jewel);
-    // }
-
     // Construction de la grille
     buildGrid = () => {
-        for (let i = 0; i < this.state.gridWidth; i++) {
-            for (let j = 0; j < this.state.gridHeight; j++) {
+        for (let i = 0; i < this.state.gridHeigth; i++) {
+            for (let j = 0; j < this.state.gridWidth; j++) {
                 if ((i + j) % 2 == 0) {
                     this.state.line.push(
                         <Text style={styles.gridBox}></Text>
@@ -69,25 +61,40 @@ export default class Box extends React.Component {
     }
 
     // placement des jewels
-    generateRandomImage = () => { 
-        let i = Math.floor(Math.random() * this.state.jewelRandom.length); 
+    generateRandomImage = () => {
+        let i = Math.floor(Math.random() * this.state.jewelRandom.length);
         // console.log(i);
         // console.log(this.state.jewelRandom[i]);
         return this.state.jewelRandom[i];
-    }; 
-    
+    };
+
+    // isValide = (valide) => {
+    //     for (let i = 0; i < valide.length; i++) {
+    //         if (valide[i] === valide[i + 1] && valide[i] == valide[i + 2]) {
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
     buildJewel = () => {
-        for (let i = 0; i < this.state.gridWidth; i++) {
-            for (let j = 0; j < this.state.gridHeight; j++) {
+        for (let i = 0; i < this.state.gridHeigth; i++) {
+            for (let j = 0; j < this.state.gridWidth; j++) {
                 this.state.jewel.push(
-                    <Image style={styles.jewel} source={this.generateRandomImage()} />
+                    <TouchableOpacity>
+                        <Image style={styles.jewel} source={this.generateRandomImage()} />
+                    </TouchableOpacity>
                 )
             }
         }
     }
 
+    renderItem = ({ i }) => {
+        return <Image style={styles.jewel}>{i.jewelRandom}</Image>
+    }
+
     render() {
-        
+
         return (
             <View>
                 <View style={styles.box}>
@@ -96,7 +103,6 @@ export default class Box extends React.Component {
                 <View style={styles.boxJewel}>
                     {this.state.jewel}
                 </View>
-
             </View>
         )
     }
