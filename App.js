@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Everything starts here!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+// CSS
+import { styles } from "./css/style.js";
+
+// import components
+import GamePage from "./screen/GamePage.js";
+import ScorePlayer from "./screen/components/player/scorePlayer.js";
+import Pause from "./screen/components/pause.js";
+import Login from "./screen/login.js";
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    // if (!this.state.fontsLoaded) {
+    //   return <AppLoading />;
+    // } else {
+    return (
+      <View style={styles.flex}>
+        {/* <Login /> */}
+        <GamePage />
+        {/* <ScorePlayer /> */}
+        {/* <Pause /> */}
+      </View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
