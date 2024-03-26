@@ -2,9 +2,6 @@ import React from "react";
 import { View, ImageBackground, Modal, TouchableOpacity } from "react-native";
 
 // COMPONENTS
-import BasicButton from "./components/BasicButton.js";
-import GameGrid from "./components/GameGrid.js";
-import ScoreCard from "./components/ScoreCard.js";
 import LevelBar from "./components/LevelBar.js";
 import BasicDisplay from "../screen/components/BasicDisplay.js";
 import BasicDisplay2 from "../screen/components/BasicDisplay2.js";
@@ -34,6 +31,16 @@ export default class Game extends React.Component {
       modalVisible: false,
       modalScore: false,
       pause: true,
+      background: [],
+      backgroundRandom: [
+        images.back_1,
+        images.back_2,
+        images.back_3,
+        images.back_4,
+        images.back_5,
+        images.back_6,
+        images.back_7,
+      ],
     };
   }
 
@@ -62,6 +69,12 @@ export default class Game extends React.Component {
       }
     }, 3000);
   }
+
+  // placement des background
+  generateRandomBackground = () => {
+    let i = Math.floor(Math.random() * this.state.backgroundRandom.length);
+    return this.state.backgroundRandom[i];
+  };
 
   newgame() {
     this.state.tries = 0;
@@ -110,9 +123,10 @@ export default class Game extends React.Component {
 
   render() {
     let { score, tries } = this.props;
+    const { navigate } = this.props.navigation;
 
     return (
-      <ImageBackground source={images.back_1} style={styles.ImageBackground}>
+      <ImageBackground source={this.generateRandomBackground()} style={styles.ImageBackground}>
         <View style={styles.game}>
           <View style={styles.flex}>
             <View style={styles.flex}>
@@ -137,7 +151,7 @@ export default class Game extends React.Component {
                     transparent={true}
                     statusBarTranslucent={true}
                   >
-                    <ScorePlayer />
+                    <ScorePlayer onPress={() => navigate("Login")} />
                   </Modal>
 
                   <View style={styles.triesScore2}>

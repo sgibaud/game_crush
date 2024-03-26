@@ -1,13 +1,13 @@
 import React from "react";
-import { View } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import firebase from "@react-native-firebase/app";
 
 // CSS
 import { styles } from "./css/style.js";
 
 // import components
-import GamePage from "./screen/GamePage.js";
-import ScorePlayer from "./screen/components/player/scorePlayer.js";
-import Pause from "./screen/components/pause.js";
+import Game from "./screen/GamePage.js";
 import Login from "./screen/Login.js";
 
 export default class App extends React.Component {
@@ -16,13 +16,14 @@ export default class App extends React.Component {
   }
 
   render() {
+    const Stack = createNativeStackNavigator();
     return (
-      <View style={styles.flex}>
-        <Login />
-        {/* <GamePage /> */}
-        {/* <ScorePlayer /> */}
-        {/* <Pause /> */}
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Game" component={Game} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }

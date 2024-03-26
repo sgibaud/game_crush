@@ -25,7 +25,8 @@ export default class Box extends React.Component {
                 images.four,
                 images.five,
                 images.six,
-                images.seven
+                images.seven,
+                images.eight
             ]
         }
     }
@@ -60,23 +61,13 @@ export default class Box extends React.Component {
         }
     }
 
-    // placement des jewels
+    // jewels aléatoire
     generateRandomImage = () => {
         let i = Math.floor(Math.random() * this.state.jewelRandom.length);
-        // console.log(i);
-        // console.log(this.state.jewelRandom[i]);
         return this.state.jewelRandom[i];
     };
 
-    // isValide = (valide) => {
-    //     for (let i = 0; i < valide.length; i++) {
-    //         if (valide[i] === valide[i + 1] && valide[i] == valide[i + 2]) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
+    // placement des jewels
     buildJewel = () => {
         for (let i = 0; i < this.state.gridHeigth; i++) {
             for (let j = 0; j < this.state.gridWidth; j++) {
@@ -87,10 +78,6 @@ export default class Box extends React.Component {
                 )
             }
         }
-    }
-
-    renderItem = ({ i }) => {
-        return <Image style={styles.jewel}>{i.jewelRandom}</Image>
     }
 
     render() {

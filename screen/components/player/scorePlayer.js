@@ -1,5 +1,11 @@
 import React from "react";
-import { ImageBackground, Text, View, Pressable, TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  Text,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 
 // Components
 import Player from "./player.js";
@@ -27,6 +33,7 @@ export default class ScorePlayer extends React.Component {
         </View>
       );
     }
+    const { onPress } = this.props;
 
     return (
       <View style={[styles.container, styles.backgroundModal]}>
@@ -39,12 +46,12 @@ export default class ScorePlayer extends React.Component {
             <Text style={styles.fontTable}>LEVEL</Text>
           </View>
           {this.state.player}
-          {/* <Pressable onPress={onPress}>
+          <Pressable onPress={onPress}>
             <ImageBackground
               source={images.newGame}
               style={styles.newGame}
             ></ImageBackground>
-          </Pressable> */}
+          </Pressable>
         </View>
       </View>
     );
