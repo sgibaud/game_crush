@@ -1,14 +1,12 @@
 import React from "react";
-import {
-  View,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, ImageBackground, Image, TouchableOpacity } from "react-native";
 
 // import constants
 import { images } from "../constants";
+
+// import database
+import { collection, addDoc } from "firebase/firestore";
+import db from "../database/firebaseDb.js";
 
 // components
 import InputConnection from "./components/divers/InputConnection.js";
@@ -19,69 +17,56 @@ import { styles } from "../css/style.js";
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name: "",
       surname: "",
-      mail: ""
-    };
-
-    onPressLogin = () => {
-      const formData = new FormData();
-      formData.append("name", this.state.name);
-      formData.append("surname", this.state.surname);
-      formData.append("mail", this.state.mail);
-      // fetch("http://localhost:3306/bejewel/", {
-      //   method: "POST",
-      //   headers: {
-      //     // Accept: "application/json",
-      //     // "Content-Type": "application/json",
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      //   body: formData,
-      // })
-      //   .then((response) => response.json())
-      //   .then((json) => {
-      this.props.navigation.navigate("Game");
-      // if(json == true) {
-      //   this.props.navigation.navigate("Game");
-      // } else {
-      //   Alert.alert(
-      // 		'Erreur',
-      // 		'Login ou mot de passe',
-      // 		[
-      // 			{ text: 'OK', onPress: () => console.log('Ok pressed') },
-      // 		],
-      // 		{ cancelable: false },
-      // 	);
-      // }
-      // });
+      mail: "",
     };
   }
 
+  // inputValueUpdate = (val, prop) => {
+  //   const state = this.state;
+  //   state[prop] = val;
+  //   this.setState(state);
+  // };
+
+  dbRef = collection(db, "bejewel");
+
+  storeUser = async () => {
+    if (this.state.name === this.state.name) {
+      this.props.navigation.navigate("Game");
+    } else {
+      await addDoc(this.dbRef, {
+        name: this.state.name,
+        surname: this.state.surname,
+        mail: this.state.mail,
+      });
+      this.props.navigation.navigate("Game");
+    }
+  };
+
   render() {
     return (
-      <ImageBackground
-        source={images.back_2}
-        style={styles.ImageBackground}
-      >
+      <ImageBackground source={images.back_2} style={styles.ImageBackground}>
         <View style={[styles.container, styles.flex]}>
           <Image source={images.logo2} style={styles.logo} />
           <InputConnection
-            placeHolder="nom"
-            // value={this.state.mail}
-            onChangeText={(text) => this.setState({ name: text })}
+            placeHolder={"name"}
+            value={this.state.name}
+            onChangeText={(name) => this.setState({ name })}
           />
           <InputConnection
-            placeHolder="prénom"
-            // value={this.state.pwd}
-            onChangeText={(text) => this.setState({ surname: text })}
+            placeHolder={"surname"}
+            value={this.state.surname}
+            onChangeText={(surname) => this.setState({ surname })}
           />
           <InputConnection
-            placeHolder="mail"
-            // value={this.state.pwd}
-            onChangeText={(text) => this.setState({ mail: text })}
+            placeHolder={"mail"}
+            value={this.state.mailAddress}
+            onChangeText={(mail) => this.setState({ mail })}
           />
-          <TouchableOpacity onPress={onPressLogin}>
+          <TouchableOpacity onPress={() => this.storeUser()}>
             <ImageBackground
               source={images.game}
               style={styles.btnGame}
