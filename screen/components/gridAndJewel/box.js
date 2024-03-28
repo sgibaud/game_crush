@@ -110,12 +110,12 @@ export default class Box extends React.Component {
 								   
 								   start = [0,0];
 								   end = [0,0];
-								   this.forceUpdate();
-								   setTimeout(() => {console.log(this.matrix[i][j]);this.buildJewel();},500);
+								   
+								   setTimeout(() => {console.log(this.matrix[i][j]);this.buildJewel();this.forceUpdate();},500);
 								  }
 								}
                         
-                        style={styles.jewel} source={this.matrix[i][j]} />
+                        style={styles.jewel} source={this.matrix[i][j]+2} />
                     </TouchableOpacity>
                 )
             }

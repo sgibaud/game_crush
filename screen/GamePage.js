@@ -101,7 +101,7 @@ export default class Game extends React.Component {
 				val = this.randint(1,7);
 				while(!((((i<2)&&(j<2))||((i<2)&&((col[j-1]!=val)||(col[j-2]!=val))))
 				||((j<2)&&((res[i-1][j]!=val)||(res[i-2][j]!=val)))||(((res[i-1][j]!=val)||(res[i-2][j]!=val))&&((col[j-1]!=val)||(col[j-2]!=val))))){
-					val = this.randint(1,7);
+					val = this.randint(0,7);
 					}
 				col[j] = val;
 				}
@@ -168,26 +168,26 @@ export default class Game extends React.Component {
 				for(let j=start[0];j<l-1;j++){
 					this.matrix[j][i]= this.matrix[j+1][i];
 					}
-				this.state.matrix[i][l-1]= -1;
-				console.log(this.matrix[i][l-1]);
+				this.matrix[l-1][i]= -1;
+				console.log("Effacé:",l-2,i);
+				console.log(this.matrix[l-2][i]);
 				this.fill(i);
 				}
 			}
 		if(start[1]==end[1]){ //Combinaison sur une colonne.
 			for(let j=0;j<=end[0]-start[0];j++){
-				if (j+end[1]<this.matrix[0].length){
-					this.matrix[j+start[0]][start[1]]= this.matrix[j+end[0]][start[1]];
-					this.matrix[j+end[0]][start[1]]=-1;
-					console.log(this.matrix[j+end[0]][start[1]]);
+				this.matrix[j+start[0]][start[1]]=-1;
+				}
+			for(let j=0;j<=end[0]-start[0];j++){
+				for(let k=0;k<this.matrix.length-1;k++){
+						if (this.matrix[k][start[1]] == -1){
+							this.matrix[k][start[1]] = this.matrix[k+1][start[1]];
+							this.matrix[k+1][start[1]] = -1;
+							}
 					}
-				else{
-					this.state.matrix[j+start[0]][start[1]]=-1;
-					console.log(this.matrix[j+start[0]][start[1]]);
-					}
-					console.log(this.matrix[start[1]]);
+				}
 			this.fill(start[1]);
 			}
-		}
 		}
 	
 	fill(column){ //Remplis une colonne donnée de la matrice.
@@ -196,10 +196,14 @@ export default class Game extends React.Component {
 		console.log("------");	
 		console.log(this.matrix);
 		for(let i=0;i<this.state.matrix[0].length;i++){
-				if(this.matrix[i][column] == -1){this.matrix[i][column]=this.randint(1,7);}
+				if(this.matrix[i][column] == -1){this.matrix[i][column]=this.randint(0,7);}
 			}
 		console.log("------");
 		console.log(this.matrix);
+		
+		for(let i=0;i<this.state.matrix[0].length;i++){
+				this.check([i,column])
+			}
 		}
 		
 	randint(min=0,range=10){ // Renvoie un nombre entre min et min+range.
