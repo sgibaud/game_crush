@@ -17,6 +17,7 @@ export default class InputConnection extends React.Component {
 				<TextInput
 					onChangeText={onChangeText}
 					placeholder={placeHolder}
+					placeholderTextColor="#CFD4D9"
 					keyboardType={type}
 					style={[styles.textInput, styles.input]}
 					value={input}

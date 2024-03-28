@@ -53,13 +53,13 @@ export const styles = StyleSheet.create({
   },
   backgroundModal: {
     flex: 1,
-    backgroundColor: "rgba(104 1 242 / 0.8)",
+    backgroundColor: "rgba(166 197 223 / 0.8)",
     opacity: 4,
   },
   boxModal: {
     width: 250,
     height: 450,
-    backgroundColor: "#05DBF2",
+    backgroundColor: "#2E49D9",
     borderRadius: 8,
     padding: 20,
   },
@@ -101,6 +101,14 @@ export const styles = StyleSheet.create({
     marginTop: 40,
     width: "auto",
     height: 49,
+  },
+  btnGame: {
+    // alignItems: "center",
+    // justifyContent: "center",
+    // margin: 20,
+    marginTop: 10,
+    width: 166.125,
+    height: 48,
   },
   player: {
     width: 120,
@@ -147,12 +155,14 @@ export const styles = StyleSheet.create({
     width: 200,
     borderRadius: 6,
     borderColor: "#B3B3B3",
-    borderWidth: 1,
+    borderWidth: 0,
+    backgroundColor: "rgba(255 255 255 / 0.35)",
+    color: "#FFFFFF"
   },
   textInput: {
     fontWeight: "bold",
     fontSize: 16,
-    color: "#B3B3B3",
+    color: '#ffffff',
   },
   // ProgressBar
   levelbar_inner: {

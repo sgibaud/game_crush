@@ -1,40 +1,77 @@
 import React from "react";
-import { View, ImageBackground, Image, InputText, Text } from "react-native";
+import { View, ImageBackground, Image, TouchableOpacity } from "react-native";
 
 // import constants
 import { images } from "../constants";
+
+// import database
+import { collection, addDoc } from "firebase/firestore";
+import db from "../database/firebaseDb.js";
 
 // components
 import InputConnection from "./components/divers/InputConnection.js";
 
 // import components
-import Header from "./components/divers/Header.js";
 import { styles } from "../css/style.js";
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      name: "",
+      surname: "",
       mail: "",
-      pwd: "",
     };
   }
+
+  // inputValueUpdate = (val, prop) => {
+  //   const state = this.state;
+  //   state[prop] = val;
+  //   this.setState(state);
+  // };
+
+  dbRef = collection(db, "bejewel");
+
+  storeUser = async () => {
+    if (this.state.name === this.state.name) {
+      this.props.navigation.navigate("Game");
+    } else {
+      await addDoc(this.dbRef, {
+        name: this.state.name,
+        surname: this.state.surname,
+        mail: this.state.mail,
+      });
+      this.props.navigation.navigate("Game");
+    }
+  };
 
   render() {
     return (
       <ImageBackground source={images.back_2} style={styles.ImageBackground}>
         <View style={[styles.container, styles.flex]}>
-          <Image source={images.logo} style={styles.logo} />
+          <Image source={images.logo2} style={styles.logo} />
           <InputConnection
-            placeHolder="mail"
-            //   value={this.state.mail}
-            //   onChangeText={(text) => this.setState({ mail: text })}
+            placeHolder={"name"}
+            value={this.state.name}
+            onChangeText={(name) => this.setState({ name })}
           />
           <InputConnection
-            placeHolder="mot de passe"
-            //   value={this.state.pwd}
-            //   onChangeText={(text) => this.setState({ mail: text })}
+            placeHolder={"surname"}
+            value={this.state.surname}
+            onChangeText={(surname) => this.setState({ surname })}
           />
+          <InputConnection
+            placeHolder={"mail"}
+            value={this.state.mailAddress}
+            onChangeText={(mail) => this.setState({ mail })}
+          />
+          <TouchableOpacity onPress={() => this.storeUser()}>
+            <ImageBackground
+              source={images.game}
+              style={styles.btnGame}
+            ></ImageBackground>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     );

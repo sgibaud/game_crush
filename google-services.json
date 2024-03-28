@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93215067657",
+    "project_id": "bejewel-87aa5",
+    "storage_bucket": "bejewel-87aa5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93215067657:android:2ee94c1cef797c7167b2d8",
+        "android_client_info": {
+          "package_name": "com.miskatonic.bejewel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPJ5mgETwnCwT65OiLVSpNRH3F3ZXczKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
