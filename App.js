@@ -18,8 +18,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.flex}>
-        <Login />
-        {/* <GamePage /> */}
+        {/*<Login />*/}
+        <GamePage />
         {/* <ScorePlayer /> */}
         {/* <Pause /> */}
       </View>

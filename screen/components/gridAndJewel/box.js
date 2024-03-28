@@ -11,7 +11,10 @@ export default class Box extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+			start: [0,0],
+			end: [0,0],
             status: true,
+            matrix:[],
             grid: [],
             board: 64,
             line: [],
@@ -32,7 +35,9 @@ export default class Box extends React.Component {
 
     componentDidMount() {
         this.initGame();
+        //this.matrix = this.props.matrice;
         this.initJewel();
+        
     }
 
     initGame = () => {
@@ -78,11 +83,48 @@ export default class Box extends React.Component {
     // }
 
     buildJewel = () => {
+		this.matrix = this.props.matrice;
+		this.state.jewel = [];
         for (let i = 0; i < this.state.gridHeigth; i++) {
             for (let j = 0; j < this.state.gridWidth; j++) {
                 this.state.jewel.push(
-                    <TouchableOpacity>
-                        <Image style={styles.jewel} source={this.generateRandomImage()} />
+                    <TouchableOpacity >
+                        <Image 
+							onTouchStart={
+								(e) => {
+									console.debug("TouchStart");
+								  this.state.start= [e.nativeEvent.pageX,e.nativeEvent.pageY];
+								  }
+								} 
+							onTouchEnd={
+								(e) =>{
+									console.log(this.matrix[i][j]);
+									let offset = 30;
+									let notdone = true;
+									console.debug("TouchEnd");
+								   this.state.end= [e.nativeEvent.pageX,e.nativeEvent.pageY];
+								   
+								   
+								   console.log("Point séléctionné:");
+								   console.log([i,j]);
+								   //console.log("Debut/fin de slide :"); console.log(this.state.start); console.log(this.state.end);
+								   if(this.state.end[0]-this.state.start[0]>offset){notdone = false; this.props.swap([i,j],[i,j+1])}
+								   
+								   if((this.state.end[0]-this.state.start[0]<-1*offset)&&notdone){notdone = false; this.props.swap([i,j],[i,j-1])}
+								   
+								   if((this.state.end[1]-this.state.start[1]>offset)&&notdone){notdone = false; this.props.swap([i,j],[i+1,j])}
+								   
+								   if((this.state.end[1]-this.state.start[1]<-1*offset)&&notdone){this.props.swap([i,j],[i-1,j])}
+								   
+								   
+								   start = [0,0];
+								   end = [0,0];
+								   this.forceUpdate();
+								   setTimeout(() => {console.log(this.matrix[i][j]);this.buildJewel();},500);
+								  }
+								}
+                        
+                        style={styles.jewel} source={this.matrix[i][j]} />
                     </TouchableOpacity>
                 )
             }
