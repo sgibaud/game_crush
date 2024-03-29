@@ -11,11 +11,7 @@ import { images } from "../../../constants";
 import {
   collection,
   query,
-  where,
-  doc,
-  getDoc,
   getDocs,
-  setDoc,
   limit,
 } from "firebase/firestore";
 import db from "../../../database/firebaseDb.js";
@@ -38,7 +34,7 @@ export default class ScorePlayer extends React.Component {
 
   scorePlayer = async () => {
     try {
-      const q = query(collection(db, "bejewel"));
+      const q = query(collection(db, "bejewel"), limit(6));
       const querySnapshot = await getDocs(q);
   
       if (querySnapshot) {
@@ -72,7 +68,7 @@ export default class ScorePlayer extends React.Component {
           {this.state.player.map((player) => (
             <View key={player.id} style={[styles.directionRow, styles.space]}>
               <Player playerScore={player.name} />
-              <Player playerScore="10" />
+              <Player playerScore={player.level} />
             </View>
           ))}
           <Pressable onPress={onPress}>

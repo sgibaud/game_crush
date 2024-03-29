@@ -1,11 +1,17 @@
 import React from "react";
-import { View, ImageBackground, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  DynamicColorIOS,
+} from "react-native";
 
 // import constants
 import { images } from "../constants";
 
 // import database
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import db from "../database/firebaseDb.js";
 
 // components
@@ -22,25 +28,46 @@ export default class Login extends React.Component {
       name: "",
       surname: "",
       mail: "",
+      level: "",
+      player: [],
     };
   }
 
-  // inputValueUpdate = (val, prop) => {
-  //   const state = this.state;
-  //   state[prop] = val;
-  //   this.setState(state);
-  // };
+  async componentDidMount() {
+    const user = await this.getUser();
+    this.setState({ player: user });
+  }
 
+  // connexion à la base Firestore
   dbRef = collection(db, "bejewel");
 
+  // lit la bdd pur connaitre les utilisateurs
+  getUser = async () => {
+    const docSnap = await getDocs(this.dbRef);
+    const names = docSnap.docs.map((doc) => doc.data());
+    // console.log(`${doc.id} => ${doc.data()}`);
+    // console.log(names);
+    return names;
+  };
+
   storeUser = async () => {
-    if (this.state.name === this.state.name) {
+    let playerName = this.state.player.map((users) => {
+      return users.name;
+    });
+    let playerSurname = this.state.player.map((users) => {
+      return users.surname;
+    });
+    let playerMail = this.state.player.map((users) => {
+      return users.mail;
+    });
+    if (this.state.name === playerName && this.state.surname === playerSurname && this.state.mail === playerMail) {
       this.props.navigation.navigate("Game");
     } else {
       await addDoc(this.dbRef, {
         name: this.state.name,
         surname: this.state.surname,
         mail: this.state.mail,
+        level: "",
       });
       this.props.navigation.navigate("Game");
     }
