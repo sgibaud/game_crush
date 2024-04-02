@@ -247,6 +247,7 @@ export default class Game extends React.Component {
         console.log("Effacé:", l - 2, i);
         console.log(this.matrix[l - 2][i]);
         this.fill(i);
+        this.score(end[1]-start[1]);
       }
     }
     if (start[1] == end[1]) {
@@ -263,6 +264,7 @@ export default class Game extends React.Component {
         }
       }
       this.fill(start[1]);
+      this.score(end[0]-start[0]);
     }
   }
 
@@ -371,6 +373,26 @@ export default class Game extends React.Component {
       }
     }
   }
+
+ score(i){
+	 let bonus = 0;
+	 switch (i){
+		 case 3:
+			bonus = 50;
+			break;
+		 case 4:
+			bonus = 150;
+			break;
+		 case 5:
+			bonus = 500;
+			break;
+		 default:
+			return bonus;
+		 }
+	 
+	 this.score = this.score + bonus;
+	 return bonus;
+	 }
 
   tick() {
     //Ecoulement du temps et perte de score selon ce dernier.
