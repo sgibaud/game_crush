@@ -387,7 +387,7 @@ export default class Game extends React.Component {
 			bonus = 500;
 			break;
 		 default:
-			return bonus;
+			return bonus*this.level;
 		 }
 	 
 	 this.score = this.score + bonus;
