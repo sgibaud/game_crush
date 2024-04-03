@@ -75,16 +75,16 @@ export default class Game extends React.Component {
 
   count() {
     //   return null;
-    this.state.time = 186;
+    this.time = 186;
     const interval = setInterval(() => {
-      if (!this.state.status) {
-        this.setState({ width: this.state.time });
+      if (!this.status) {
+        this.setState({ width: this.time });
       } else {
-        this.state.time = this.state.time - this.state.level;
+        this.time = this.time - this.level;
         this.setState({
-          width: this.state.time,
+          width: this.time,
         });
-        if (this.state.time <= 0) {
+        if (this.time <= 0) {
           this.setState({
             width: 0,
           });
@@ -392,8 +392,8 @@ export default class Game extends React.Component {
 			return bonus*this.level;
 		 }
 	 
-	 this.time = this.time + (i/10)*272;
-	 if(this.time >= 272){this.levelup();}
+	 this.time = this.time + (i/10)*200; //calcul du temps gagné
+	 if(this.time >= 272){this.levelup();} // gain de niveau
 	 this.score = this.score + bonus*this.level;
 	 console.log("Score:",this.score);
 	 console.log("Level:",this.level);
