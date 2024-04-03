@@ -74,10 +74,13 @@ export default class Box extends React.Component {
 
     // placement des jewels
     buildJewel = () => {
+		let jewelStyle = null;
 		this.matrix = this.props.matrice;
 		this.state.jewel = [];
         for (let i = 0; i < this.state.gridHeigth; i++) {
             for (let j = 0; j < this.state.gridWidth; j++) {
+				if(((this.props.hint[0][0] =  i)&&(this.props.hint[0][1] =  j))||((this.props.hint[1][0] =  i)&&(this.props.hint[1][1] =  j))){let jewelStyle = styles.yesHint;}
+				else {let jewelStyle = styles.noHint;}
                 this.state.jewel.push(
                     <TouchableOpacity >
                         <Image 

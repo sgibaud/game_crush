@@ -46,6 +46,7 @@ export default class Game extends React.Component {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
       ],
+      activehint = [[-1,-1][-1,-1]],
       level: 1,
       style: null,
       status: true,
@@ -315,6 +316,15 @@ export default class Game extends React.Component {
     );
   }
 
+	hintset(){
+		this.activehint = this.hint();
+		setTimeout(this.hintunset(), 5000);
+		}
+	
+	hintunset(){
+		this.activehint = [[-1,-1][-1,-1]];
+		}
+
   hint() {
     //Renvoie les deux position d'un échange fonctionnel (non aléatoire, prend le premier).
     let direction = [
@@ -475,7 +485,7 @@ export default class Game extends React.Component {
                     <TouchableOpacity onPress={this.showModal}>
                       <BasicDisplay2 iconBlue={images.iconPause} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.hintset}>
                       <BasicDisplay2 iconBlue={images.iconHelp} />
                     </TouchableOpacity>
                   </View>
@@ -503,7 +513,7 @@ export default class Game extends React.Component {
           <View style={styles.flex_2}>
             {/* <GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} /> */}
             {this.state.status ? (
-              <Box matrice={this.matrix} swap={(a, b) => this.swap(a, b)} />
+              <Box matrice={this.matrix} hint={this.activehint} swap={(a, b) => this.swap(a, b)} />
             ) : null}
           </View>
         </View>

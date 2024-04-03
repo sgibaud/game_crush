@@ -286,4 +286,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  
+  noHint: {
+    backgroundColor: "#f2b505",
+    opacity:0,
+  },
+  yesHint: {
+    backgroundColor: "#f2b505",
+    opacity:1,
+  },
 });
