@@ -37,7 +37,7 @@ export default class Game extends React.Component {
       time: 0,
       player: [],
       matrix: [
-        [0, 0, 0, 0, 0, 0, 0, 0],
+        [-1, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -46,7 +46,7 @@ export default class Game extends React.Component {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
       ],
-      level: 0,
+      level: 1,
       style: null,
       status: true,
       modalVisible: false,
@@ -63,6 +63,7 @@ export default class Game extends React.Component {
         images.back_7,
       ],
     };
+    this.newgame(5);
   }
 
   // decrementation de la barre de temps
@@ -74,16 +75,16 @@ export default class Game extends React.Component {
 
   count() {
     //   return null;
-    let counter = 186;
+    this.state.time = 186;
     const interval = setInterval(() => {
       if (!this.state.status) {
-        this.setState({ width: counter });
+        this.setState({ width: this.state.time });
       } else {
-        counter = counter - this.state.score;
+        this.state.time = this.state.time - this.state.level;
         this.setState({
-          width: counter,
+          width: this.state.time,
         });
-        if (counter <= 0) {
+        if (this.state.time <= 0) {
           this.setState({
             width: 0,
           });
@@ -125,11 +126,12 @@ export default class Game extends React.Component {
 
   newgame(t) {
     //Lance une nouvelle partie.
-    this.state.tries = t;
-    this.state.score = 0;
-    this.state.level = 0;
-    this.state.time = 0;
-    this.state.game = 1;
+    this.tries = t;
+    this.score = 0;
+    this.level = 1;
+    this.time = 186;
+    this.game = 1;
+    this.newmatrix(8, 8);
   }
 
   newmatrix(x, y) {
@@ -247,7 +249,7 @@ export default class Game extends React.Component {
         console.log("Effacé:", l - 2, i);
         console.log(this.matrix[l - 2][i]);
         this.fill(i);
-        this.score(end[1]-start[1]);
+        this.scoreup(end[1]-start[1]);
       }
     }
     if (start[1] == end[1]) {
@@ -264,7 +266,7 @@ export default class Game extends React.Component {
         }
       }
       this.fill(start[1]);
-      this.score(end[0]-start[0]);
+      this.scoreup(end[0]-start[0]);
     }
   }
 
@@ -325,34 +327,34 @@ export default class Game extends React.Component {
         let l = 1;
         for (let k = 0; k < 2; k++) {
           if (
-            (this.state.matrix[i - 2 * direction[k][0]][
+            (this.matrix[i - 2 * direction[k][0]][
               j - 2 * direction[k][1]
-            ] = this.state.matrix[i - direction[k][0]][j - direction[k][1]])
+            ] = this.matrix[i - direction[k][0]][j - direction[k][1]])
           ) {
             val =
-              this.state.matrix[i - 2 * direction[k][0]][
+              this.matrix[i - 2 * direction[k][0]][
                 j - 2 * direction[k][1]
               ];
           }
           if (
-            (this.state.matrix[i + 2 * direction[k][0]][
+            (this.matrix[i + 2 * direction[k][0]][
               j + 2 * direction[k][1]
             ] = this.state.matrix[i + direction[k][0]][j + direction[k][1]])
           ) {
             val =
-              this.state.matrix[i + 2 * direction[k][0]][
+              this.matrix[i + 2 * direction[k][0]][
                 j + 2 * direction[k][1]
               ];
           }
           if (
-            (this.state.matrix[i + direction[k][0]][j + direction[k][1]] =
-              this.state.matrix[i - direction[k][0]][j - direction[k][1]])
+            (this.matrix[i + direction[k][0]][j + direction[k][1]] =
+              this.matrix[i - direction[k][0]][j - direction[k][1]])
           ) {
-            val = this.state.matrix[i + direction[k][0]][j + direction[k][1]];
+            val = this.matrix[i + direction[k][0]][j + direction[k][1]];
           }
 
           if (
-            (val = this.state.matrix[i - direction[l][0]][j - direction[l][1]])
+            (val = this.matrix[i - direction[l][0]][j - direction[l][1]])
           ) {
             return [
               [i, j],
@@ -360,7 +362,7 @@ export default class Game extends React.Component {
             ];
           }
           if (
-            (val = this.state.matrix[i + direction[l][0]][j + direction[l][1]])
+            (val = this.matrix[i + direction[l][0]][j + direction[l][1]])
           ) {
             return [
               [i, j],
@@ -374,25 +376,34 @@ export default class Game extends React.Component {
     }
   }
 
- score(i){
+ scoreup(i){
 	 let bonus = 0;
 	 switch (i){
-		 case 3:
+		 case 2:
 			bonus = 50;
 			break;
-		 case 4:
+		 case 3:
 			bonus = 150;
 			break;
-		 case 5:
+		 case 4,5:
 			bonus = 500;
 			break;
 		 default:
 			return bonus*this.level;
 		 }
 	 
-	 this.score = this.score + bonus;
+	 this.time = this.time + (i/10)*272;
+	 if(this.time >= 272){this.levelup();}
+	 this.score = this.score + bonus*this.level;
+	 console.log("Score:",this.score);
+	 console.log("Level:",this.level);
 	 return bonus;
 	 }
+
+	levelup(){
+		this.level++;
+		this.time = 186;
+		}
 
   tick() {
     //Ecoulement du temps et perte de score selon ce dernier.
@@ -427,7 +438,6 @@ export default class Game extends React.Component {
 
   render() {
     let { score, tries } = this.props;
-    this.newmatrix(8, 8);
     const { navigate } = this.props.navigation;
     return (
       <ImageBackground
@@ -475,7 +485,7 @@ export default class Game extends React.Component {
               {/* Icone du nombre d'essai et affichage du level */}
               <View style={styles.triesScore}>
                 <BasicDisplay innertext={this.state.tries} outertext="ESSAI" />
-                <BasicDisplay innertext={this.state.score} outertext="LEVEL" />
+                <BasicDisplay innertext={this.level} outertext="LEVEL" />
               </View>
             </View>
             {/* <ScoreCard
