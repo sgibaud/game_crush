@@ -8,13 +8,8 @@ import Player from "./player.js";
 import { images } from "../../../constants";
 
 // import database
-import {
-  collection,
-  query,
-  getDocs,
-  limit,
-} from "firebase/firestore";
-import db from "../../../database/firebaseDb.js";
+import { collection, query, getDocs, limit, orderBy } from "firebase/firestore";
+import { db } from "../../../database/firebaseDb.js";
 
 // CSS
 import { styles } from "../../../css/style";
@@ -34,12 +29,15 @@ export default class ScorePlayer extends React.Component {
 
   scorePlayer = async () => {
     try {
-      const q = query(collection(db, "bejewel"), limit(6));
+      const q = query(collection(db, "bejewel"), orderBy("level"), limit(6));
       const querySnapshot = await getDocs(q);
-  
+
       if (querySnapshot) {
         const playersData = querySnapshot.docs.map((doc) => doc.data());
-        console.log(playersData);
+        if (playersData && playersData.length > 0) {
+          playersData.sort((a, b) => b.level - a.level);
+        }
+        // console.log(playersData.level.sort());
         return playersData;
       } else {
         console.error("Aucun document trouvé dans la collection.");
@@ -52,9 +50,8 @@ export default class ScorePlayer extends React.Component {
   };
 
   render() {
-
     const { onPress } = this.props;
-
+    const { player } = this.state;
     return (
       <View style={[styles.container, styles.backgroundModal]}>
         <View style={[styles.boxModal, styles.shadowProp]}>
@@ -65,7 +62,7 @@ export default class ScorePlayer extends React.Component {
             <Text style={styles.fontTable}>PLAYER</Text>
             <Text style={styles.fontTable}>LEVEL</Text>
           </View>
-          {this.state.player.map((player) => (
+          {player.map((player) => (
             <View key={player.id} style={[styles.directionRow, styles.space]}>
               <Player playerScore={player.name} />
               <Player playerScore={player.level} />

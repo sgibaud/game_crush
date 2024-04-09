@@ -157,12 +157,12 @@ export const styles = StyleSheet.create({
     borderColor: "#B3B3B3",
     borderWidth: 0,
     backgroundColor: "rgba(255 255 255 / 0.35)",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
   textInput: {
     fontWeight: "bold",
     fontSize: 16,
-    color: '#ffffff',
+    color: "#ffffff",
   },
   // ProgressBar
   levelbar_inner: {
@@ -196,12 +196,12 @@ export const styles = StyleSheet.create({
   gridBox: {
     width: "12%",
     height: "12%",
-    backgroundColor: "rgba(150 50 50 / 0.10)",
+    backgroundColor: "rgba(75 55 125 / 0.18)",
     borderRadius: 8,
     margin: 0.75,
   },
   gridBoxB: {
-    backgroundColor: "rgba(50 50 150 / 0.25)",
+    backgroundColor: "rgba(75 55 125  / 0.27)",
   },
   box: {
     height: 400,
@@ -285,5 +285,12 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  // CSS hint
+  noHint: {
+    opacity: 0,
+  },
+  yesHint: {
+    backgroundColor: "#f2b505",
   },
 });

@@ -3,18 +3,25 @@ import { View, ImageBackground, Modal, TouchableOpacity } from "react-native";
 
 // COMPONENTS
 import LevelBar from "./components/LevelBar.js";
-import BasicDisplay from "./components/BasicDisplay.js";
-import BasicDisplay2 from "./components/BasicDisplay2.js";
+import BasicDisplay from "../screen/components/BasicDisplay.js";
+import BasicDisplay2 from "../screen/components/BasicDisplay2.js";
 import Box from "./components/gridAndJewel/box.js";
 import ScorePlayer from "./components/player/scorePlayer.js";
 import ModalPause from "./components/pause.js";
 
 // import constants
-import { images } from "../constants/index.js";
+import { images } from "../constants";
 
 // import database
-import { doc, updateDoc, where } from "firebase/firestore";
-import { db } from "../database/firebaseDb.js";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import db from "../database/firebaseDb.js";
 
 // CSS
 import { styles } from "../css/style.js";
@@ -24,7 +31,7 @@ export default class Game extends React.Component {
     super(props);
     this.state = {
       game: 0,
-      score: "",
+      score: 80,
       width: "50%",
       tries: 5,
       time: 0,
@@ -39,7 +46,7 @@ export default class Game extends React.Component {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
       ],
-      activehint: [[-1, -1][(-1, -1)]],
+      activehint = [[-1,-1][-1,-1]],
       level: 1,
       style: null,
       status: true,
@@ -47,74 +54,42 @@ export default class Game extends React.Component {
       modalScore: false,
       pause: true,
       background: [],
-      images: [
-        {
-          id: 1,
-          name: images.back_1,
-        },
-        {
-          id: 2,
-          name: images.back_2,
-        },
-        {
-          id: 3,
-          name: images.back_3,
-        },
-        {
-          id: 4,
-          name: images.back_4,
-        },
-        {
-          id: 5,
-          name: images.back_5,
-        },
-        {
-          id: 6,
-          name: images.back_6,
-        },
-        {
-          id: 7,
-          name: images.back_7,
-        },
+      backgroundRandom: [
+        images.back_1,
+        images.back_2,
+        images.back_3,
+        images.back_4,
+        images.back_5,
+        images.back_6,
+        images.back_7,
       ],
-      index: 0,
     };
     this.newgame(5);
-
-    // placement des background
-    this.generateRandomBackground = () => {
-      const { images } = this.state;
-      let i = Math.floor(Math.random() * images.length);
-      console.log(this.state.images.length);
-      this.setState({ currentIndex: i });
-      // return this.setState({ images: images[i] });
-    };
   }
 
   // decrementation de la barre de temps
-  componentDidMount() {
-    this.setState({images: this.props.src});
+  async componentDidMount() {
     this.count();
+    const user = await this.getUser();
+    this.setState({ player: user });
   }
 
   count() {
     //   return null;
-    this.state.time = 186;
-    const level = this.level;
+    this.time = 186;
     const interval = setInterval(() => {
-      if (!this.state.status) {
-        this.setState({ width: this.state.time });
+      if (!this.status) {
+        this.setState({ width: this.time });
       } else {
-        // this.state.time = this.state.time - this.state.level;
-        this.state.time = this.state.time - 5 * level;
+        this.time = this.time - this.level;
         this.setState({
-          width: this.state.time,
+          width: this.time,
         });
-        if (this.state.time <= 0) {
+        if (this.time <= 0) {
           this.setState({
             width: 0,
           });
-          this.update();
+          this.updateLevel();
           this.setState({ modalScore: true });
           clearInterval(interval);
         }
@@ -122,16 +97,30 @@ export default class Game extends React.Component {
     }, 3000);
   }
 
-  // fonction update level
-  update = async () => {
-    const { id } = this.props.route.params;
-    const level = this.level;
-    // console.log(name);
-    const updateRef = doc(db, "bejewel", id);
-    console.log(updateRef);
-    await updateDoc(updateRef, {
-      level: level,
+  // connexion à la base Firestore
+  dbRef = collection(db, "bejewel");
+
+  // lit la bdd pur connaitre les utilisateurs
+  getUser = async () => {
+    const docSnap = await getDocs(this.dbRef);
+    const names = docSnap.docs.map((doc) => doc.data());
+    return names;
+  };
+
+  updateLevel = async () => {
+    let playerId = this.state.player.map((users) => {
+      return users.id;
     });
+    const id = getDoc(this.dbRef, playerId);
+    await updateDoc(id, {
+      level: "80",
+    });
+  };
+
+  // placement des background
+  generateRandomBackground = () => {
+    let i = Math.floor(Math.random() * this.state.backgroundRandom.length);
+    return this.state.backgroundRandom[i];
   };
 
   // Fonctions de gestion grille/jeu
@@ -261,7 +250,7 @@ export default class Game extends React.Component {
         console.log("Effacé:", l - 2, i);
         console.log(this.matrix[l - 2][i]);
         this.fill(i);
-        this.scoreup(end[1] - start[1]);
+        this.scoreup(end[1]-start[1]);
       }
     }
     if (start[1] == end[1]) {
@@ -278,7 +267,7 @@ export default class Game extends React.Component {
         }
       }
       this.fill(start[1]);
-      this.scoreup(end[0] - start[0]);
+      this.scoreup(end[0]-start[0]);
     }
   }
 
@@ -327,14 +316,14 @@ export default class Game extends React.Component {
     );
   }
 
-  hintset() {
-    this.activehint = this.hint();
-    setTimeout(this.hintunset(), 5000);
-  }
-
-  hintunset() {
-    this.activehint = [[-1, -1][(-1, -1)]];
-  }
+	hintset(){
+		this.activehint = this.hint();
+		setTimeout(this.hintunset(), 5000);
+		}
+	
+	hintunset(){
+		this.activehint = [[-1,-1][-1,-1]];
+		}
 
   hint() {
     //Renvoie les deux position d'un échange fonctionnel (non aléatoire, prend le premier).
@@ -348,16 +337,24 @@ export default class Game extends React.Component {
         let l = 1;
         for (let k = 0; k < 2; k++) {
           if (
-            (this.matrix[i - 2 * direction[k][0]][j - 2 * direction[k][1]] =
-              this.matrix[i - direction[k][0]][j - direction[k][1]])
+            (this.matrix[i - 2 * direction[k][0]][
+              j - 2 * direction[k][1]
+            ] = this.matrix[i - direction[k][0]][j - direction[k][1]])
           ) {
-            val = this.matrix[i - 2 * direction[k][0]][j - 2 * direction[k][1]];
+            val =
+              this.matrix[i - 2 * direction[k][0]][
+                j - 2 * direction[k][1]
+              ];
           }
           if (
-            (this.matrix[i + 2 * direction[k][0]][j + 2 * direction[k][1]] =
-              this.state.matrix[i + direction[k][0]][j + direction[k][1]])
+            (this.matrix[i + 2 * direction[k][0]][
+              j + 2 * direction[k][1]
+            ] = this.state.matrix[i + direction[k][0]][j + direction[k][1]])
           ) {
-            val = this.matrix[i + 2 * direction[k][0]][j + 2 * direction[k][1]];
+            val =
+              this.matrix[i + 2 * direction[k][0]][
+                j + 2 * direction[k][1]
+              ];
           }
           if (
             (this.matrix[i + direction[k][0]][j + direction[k][1]] =
@@ -366,13 +363,17 @@ export default class Game extends React.Component {
             val = this.matrix[i + direction[k][0]][j + direction[k][1]];
           }
 
-          if ((val = this.matrix[i - direction[l][0]][j - direction[l][1]])) {
+          if (
+            (val = this.matrix[i - direction[l][0]][j - direction[l][1]])
+          ) {
             return [
               [i, j],
               [i - direction[l][0], j - direction[l][1]],
             ];
           }
-          if ((val = this.matrix[i + direction[l][0]][j + direction[l][1]])) {
+          if (
+            (val = this.matrix[i + direction[l][0]][j + direction[l][1]])
+          ) {
             return [
               [i, j],
               [i + direction[l][0], j + direction[l][1]],
@@ -385,39 +386,34 @@ export default class Game extends React.Component {
     }
   }
 
-  scoreup(i) {
-    let bonus = 0;
-    switch (i) {
-      case 2:
-        bonus = 50;
-        break;
-      case 3:
-        bonus = 150;
-        break;
-      case (4, 5):
-        bonus = 500;
-        break;
-      default:
-        return bonus * this.level;
-    }
+ scoreup(i){
+	 let bonus = 0;
+	 switch (i){
+		 case 2:
+			bonus = 50;
+			break;
+		 case 3:
+			bonus = 150;
+			break;
+		 case 4,5:
+			bonus = 500;
+			break;
+		 default:
+			return bonus*this.level;
+		 }
+	 
+	 this.time = this.time + (i/10)*200; //calcul du temps gagné
+	 if(this.time >= 272){this.levelup();} // gain de niveau
+	 this.score = this.score + bonus*this.level;
+	 console.log("Score:",this.score);
+	 console.log("Level:",this.level);
+	 return bonus;
+	 }
 
-    this.time = this.time + (i / 10) * 272;
-    if (this.time >= 272) {
-      this.levelup();
-    }
-    this.score = this.score + bonus * this.level;
-    console.log("Score:", this.score);
-    console.log("Level:", this.level);
-    return bonus;
-  }
-
-  levelup() {
-    this.level++;
-    this.time = 186;
-    // if (this.level++) {
-    //   this.generateRandomBackground;
-    // }
-  }
+	levelup(){
+		this.level++;
+		this.time = 186;
+		}
 
   tick() {
     //Ecoulement du temps et perte de score selon ce dernier.
@@ -451,9 +447,13 @@ export default class Game extends React.Component {
   };
 
   render() {
+    let { score, tries } = this.props;
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground source={images.back_3} style={styles.ImageBackground}>
+      <ImageBackground
+        source={this.generateRandomBackground()}
+        style={styles.ImageBackground}
+      >
         <View style={styles.game}>
           <View style={styles.flex}>
             <View style={styles.flex}>
@@ -511,12 +511,9 @@ export default class Game extends React.Component {
 
           {/* affichage de la grille et des joyaux */}
           <View style={styles.flex_2}>
+            {/* <GameGrid matrix={this.state.matrix} swap={(a, b) => this.swap(a, b)} style={styles} /> */}
             {this.state.status ? (
-              <Box
-                matrice={this.matrix}
-                hint={this.activehint}
-                swap={(a, b) => this.swap(a, b)}
-              />
+              <Box matrice={this.matrix} hint={this.activehint} swap={(a, b) => this.swap(a, b)} />
             ) : null}
           </View>
         </View>

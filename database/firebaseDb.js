@@ -1,6 +1,6 @@
 // database/firebaseDb.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -13,7 +13,7 @@ const firebaseConfig = {
     appId: "1:93215067657:web:2403e421664db83a67b2d8"
 };
 
-// firebase.initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-export default db;
+
+export { db, app};
